@@ -7,7 +7,7 @@ public class cwiczeniaInstrukcjaIf {
         if (liczba % 2 == 0) {
             System.out.println("Liczba parzysta");
         } else {
-            System.out.println("Liczba parzysta");
+            System.out.println("Liczba nieparzysta");
         }
 
 
