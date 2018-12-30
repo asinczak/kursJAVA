@@ -16,20 +16,30 @@ public class zadanie3 {
 
         int najmniejszyElementTablicy = tablica [0];
 
-
         for (int indeksTablicy = 0; indeksTablicy < tablica.length; indeksTablicy++ ) {
 
-            if (tablica[indeksTablicy] < najmniejszyElementTablicy);
+            if (tablica[indeksTablicy] < najmniejszyElementTablicy) {
 
-            najmniejszyElementTablicy = tablica [indeksTablicy];
-            System.out.println(najmniejszyElementTablicy);
+                najmniejszyElementTablicy = tablica[indeksTablicy];
+            }
         }
 
+        System.out.println(najmniejszyElementTablicy);
 
 
 
+        int największyElementTablicy = tablica [0];
 
+        for (int indeksTablicy = 0; indeksTablicy < tablica.length; indeksTablicy++) {
 
+            if (tablica[indeksTablicy] > największyElementTablicy) {
+
+                największyElementTablicy = tablica [indeksTablicy];
+
+            }
+        }
+
+        System.out.println(największyElementTablicy);
 
     }
 }
