@@ -30,14 +30,15 @@ public class zadaniaMoje8 {
         int k = 0;
         int z = 0;
 
-        for (int i = tab.length -1; i>0; i--) {
-            for (int j = tab[i].length -1; j > 0; j--) {
+        for (int i = tab.length -1; i>=0; i--) {
+            for (int j = tab[i].length -1; j >= 0; j--) {
 
                 tab2[k][z] = tab[i][j];
-                k++;
+
                 z++;
 
             }
+            k++;
         }
 
 
