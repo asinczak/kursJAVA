@@ -36,6 +36,24 @@ public class zadnie4inaczej {
 
         }
 
+        // wersja poprawiona
+
+        for (int x = 0; x < tablica.length; x++) {
+           int wynik2 = 0;
+            for (int y = 0; y <tablica.length; y++) {
+                if (tablica[x] == tablica[y]) {
+                    wynik2++;
+
+                }
+
+            }
+            System.out.println(tablica[x] + ": " + wynik2 + " razy ");
+            }
+
+
+
+
+
 
 
     }
