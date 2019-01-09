@@ -33,31 +33,13 @@ public class zadanie7 {
 
         for (int i = 0; i < tablica.length; i++) {
 
-            for (int j = 0; j < tablica.length; j++) {
+            for (int j = 0; j < tablica[i].length; j++) {
 
-              tablica [0] [0] = -Math.abs(tablica [0] [0]) ;
-                tablica [0] [1] = -Math.abs(tablica [0] [1]);
-                tablica [0] [2] = -Math.abs(tablica [0] [2]) ;
-                tablica [0] [3] = -Math.abs(tablica [0] [3]) ;
+             tablica [i] [j] = tablica [i] [j] * (-1);
 
-                tablica [1] [0] = -Math.abs(tablica [1] [0]) ;
-                tablica [1] [1] = -Math.abs(tablica [1] [2]) ;
-                tablica [1] [2] = -Math.abs(tablica [1] [2]) ;
-                tablica [1] [3] = -Math.abs(tablica [1] [3]) ;
+                System.out.println(tablica[i][j]);
 
-                tablica [2] [0] = -Math.abs(tablica [2] [0]) ;
-                tablica [2] [1] = -Math.abs(tablica [2] [1]) ;
-                tablica [2] [2] = -Math.abs(tablica [2] [2]) ;
-                tablica [2] [3] = -Math.abs(tablica [2] [3]) ;
-
-                tablica [3] [0] = -Math.abs(tablica [3] [0]) ;
-                tablica [3] [1] = -Math.abs(tablica [3] [1]) ;
-                tablica [3] [2] = -Math.abs(tablica [3] [2]) ;
-                tablica [3] [3] = -Math.abs(tablica [3] [3]) ;
-
-              System.out.println(tablica[i][j]);
             }
-
         }
 
 

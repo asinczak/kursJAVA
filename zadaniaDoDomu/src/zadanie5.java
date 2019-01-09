@@ -5,8 +5,9 @@ public class zadanie5 {
         // Program ma  rysować na ekranie (przy pomocy znaku 'o') trójkąt prostokątny, w którym
         // obydwie przyprostokątne są długości x.
 
+        String tablicaNapis = args [0];
+        Integer x = Integer.valueOf(tablicaNapis);
 
-        int x = 7;
 
         for (int i = 0; i <= x; i++){
 
