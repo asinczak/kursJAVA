@@ -4,7 +4,8 @@ public class zadaniaMoje5 {
         //Napisać program rysujący w konsoli „choinkę” złożoną ze znaków gwiazdki (*).
         //Użytkownik programu powinien podać liczbę całkowitą n, n > 0, określającą wysokość choinki (liczbę wierszy).
 
-        int wysokoscChoinki = 10;
+        String dlTablicy = args [0];
+        int wysokoscChoinki = Integer.valueOf(dlTablicy);
 
 
         for (int i = 1; i <= wysokoscChoinki; i++) {
