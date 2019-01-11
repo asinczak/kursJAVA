@@ -25,7 +25,9 @@ public class zadaniaDomoweMoje {
         //podanej liczby. Przykład, dla 15 program powinien wyświetlić 1, 3, 5, 7, 9, 11, 13,
         //15.
 
-        int liczbaCalkowita = 20;
+
+        String dlTablicy = args [0];
+        int liczbaCalkowita = Integer.valueOf(dlTablicy);
 
 
         for (int i = 1; i < liczbaCalkowita; i++) {
