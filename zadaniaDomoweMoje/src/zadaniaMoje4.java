@@ -14,8 +14,12 @@ public class zadaniaMoje4 {
         // podanie danych.
 
         float miesięcznaRata = 0f;
-        float cenaTowaru = 999.99f;
-        int liczbaRat = 10;
+
+        String dlTablicy = args [0];
+        float cenaTowaru = Integer.valueOf(dlTablicy);
+
+        String dlTablicy1 = args [1];
+        int liczbaRat = Integer.valueOf(dlTablicy1);
 
 
         if (liczbaRat >= 6 & liczbaRat <= 12) {
