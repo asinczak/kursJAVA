@@ -37,7 +37,7 @@ public class zadanie7 {
 
              tablica [i] [j] = tablica [i] [j] * (-1);
 
-                System.out.println(tablica[i][j]);
+                System.out.println("tablica [" + i + "] [" + j + "] = " + tablica[i][j]);
 
             }
         }
