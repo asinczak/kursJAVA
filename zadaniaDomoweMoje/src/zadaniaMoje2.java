@@ -4,8 +4,11 @@ public class zadaniaMoje2 {
         // Napisać program pobierający dwie liczby całkowite A oraz B, A<B a następnie
         // wyznaczający sumę ciągu liczb od A do B, czyli sumę ciągu.
 
-        int A = 4;
-        int B = 10;
+        String dlTablicy = args [0];
+        int A = Integer.valueOf(dlTablicy);
+
+        String dlTablicy1 = args [1];
+        int B = Integer.valueOf(dlTablicy1);
         int wynik = B;
 
        while (A<B) {
