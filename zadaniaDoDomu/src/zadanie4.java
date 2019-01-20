@@ -22,9 +22,7 @@ public class zadanie4 {
         int wartość = 1;
         int suma = 0;
 
-       // for (int i = 0; i < 15; i++){
-       //     System.out.println("podaj " + i + "element");
-       // }
+
 
         for (int i =0; i < tablica.length; i++){
 
@@ -43,6 +41,9 @@ public class zadanie4 {
             System.out.println(wartość + " występuje " + suma + " razy");
 
         }
+
+
+
 
 
     }

@@ -7,8 +7,8 @@ public class zadanie6 {
         //Jeśli podany wiek jest większy lub równy 18, program powinien wypisać „Jesteś pełnoletni”.
         //Dodatkowo jeśli podany wiek jest powyżej 35, program powinien wypisać „Możesz kandydować na prezydenta”.
 
-
-        int wiek = 36;
+        String tablicaNapis = args [0];
+        Integer wiek = Integer.valueOf(tablicaNapis);
 
         if (wiek < 18) {
             System.out.println("Jestes niepełnoletni");

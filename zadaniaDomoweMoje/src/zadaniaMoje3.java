@@ -4,7 +4,8 @@ public class zadaniaMoje3 {
         // Napisać program, który wczytuje liczbę całkowitą dodatnią n, a
         //następnie wyświetla na ekranie wszystkie potęgi liczby 2 nie większe, niż podana liczba.
 
-        int liczbaCalkowita = 71;
+        String dlTablicy = args [0];
+        int liczbaCalkowita = Integer.valueOf(dlTablicy);
         int wynik = 1;
 
 

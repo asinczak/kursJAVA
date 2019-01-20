@@ -4,7 +4,9 @@ public class zadaniaDoDomu {
         // Napisz program który dla podanej liczby całkowitej wyświetla jej dzielniki.
         // Przykład dla np. liczby 21 dzielniki to: 1, 3, 7, 21
 
-        int liczbaCalkowita = 50;
+        String tablicaNapis = args [0];
+        Integer liczbaCalkowita = Integer.valueOf(tablicaNapis);
+
         int dzielnik = 0;
         int i;
 

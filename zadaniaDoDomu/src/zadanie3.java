@@ -6,7 +6,10 @@ public class zadanie3 {
         //Napisz program który tworzy tablicę int 5 elementową i wyświetla na ekranie tylko najmniejszą
         // oraz największą z wartości tej tablicy np. .8 9 10 1 2 wynik na ekranie to 1 i 10
 
-        int tablica[] = new int[5];
+        String dlTablicyNapis = args [0];
+        Integer dlTablicyLiczba = Integer.valueOf(dlTablicyNapis);
+
+        int tablica[] = new int[dlTablicyLiczba];
 
         tablica[0] = 20;
         tablica[1] = 12;
@@ -40,6 +43,26 @@ public class zadanie3 {
         }
 
         System.out.println(największyElementTablicy);
+
+
+        //wersja z jedną petlą
+
+
+        for (int x = 0; x < tablica.length; x++ ) {
+            for (int y = 0; y < tablica.length; y++) {
+
+                if (tablica[y] < najmniejszyElementTablicy) {
+                    najmniejszyElementTablicy = tablica [y];
+                }
+            }
+
+            if (tablica[x] > największyElementTablicy){
+                największyElementTablicy = tablica [x];
+            }
+        }
+
+        System.out.println(najmniejszyElementTablicy + " i " + największyElementTablicy);
+
 
     }
 }
