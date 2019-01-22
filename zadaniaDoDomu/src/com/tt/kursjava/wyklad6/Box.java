@@ -1,6 +1,6 @@
 package com.tt.kursjava.wyklad6;
 
-import com.tt.kursjava.wyklad5.Box;
+//import com.tt.kursjava.wyklad5.Box;
 
 class Box {
 
