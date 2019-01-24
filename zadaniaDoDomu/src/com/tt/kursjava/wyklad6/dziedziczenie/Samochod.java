@@ -14,6 +14,7 @@ public class Samochod extends Pojazd {
     //kod (zachowania) specyficzne dla klasy potomnej
     @Override
     public void poruszajSie() {
+        //uzywajac slowa kluczowego super mozemy odwolywac sie do atrybutow i metod klassy bazowej
         super.poruszajSie();
         System.out.println("Samochod: Uruchomilem silnik");
 
