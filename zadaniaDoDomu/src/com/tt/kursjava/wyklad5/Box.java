@@ -1,7 +1,6 @@
 package com.tt.kursjava.wyklad5;
 
 public class Box {
-
     int width;
     int height;
 
