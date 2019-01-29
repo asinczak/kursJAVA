@@ -9,7 +9,7 @@ public class TestWidocznoscPakietB {
         //dostep do zmiennej o widocznosci protected poza pakietem i poza klasa dziedziczaca
         //nie da sie w ten sposob dobrac do takiej zmiennej
 
-        p.pakietowa = 0;
+        //p.pakietowa = 0;
 
     }
 
