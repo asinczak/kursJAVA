@@ -3,8 +3,11 @@ package pl.com.ttpsc.kursJava.wyklad_6;
 public class Account {
 
     double balanceAccount;
+    double balanceSavingAccount;
     String name;
     String surname;
+    String name_surname;
+
 
     public Account (String name, String surname, double balanceAccount) {
         this.name = name;
@@ -15,6 +18,10 @@ public class Account {
         }
     }
 
+    public Account (String name_surname, double balanceSavingAccount) {
+        this.name_surname = name_surname;
+        this.balanceSavingAccount = balanceSavingAccount;
+    }
 
 
     public double balanceIncrease (double amount) {
@@ -23,5 +30,9 @@ public class Account {
 
     public double balanceDecrease (double amount) {
         return balanceAccount -= amount;
+    }
+
+    public double savingBalanceIncrease () {
+        return balanceSavingAccount = balanceSavingAccount + (balanceSavingAccount*0.02);
     }
 }

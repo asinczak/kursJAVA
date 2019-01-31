@@ -12,6 +12,7 @@ package pl.com.ttpsc.kursJava.wyklad_6;
 //d.      Klasa bank powinna mieć możliwość usunięcia konta dla klienta po nazwisku – metoda przyjmuje nazwisko i wyszukuje konto do usunięcia
 //e.      Klasa bank powinna mieć możliwość wyświetlenie na ekranie wszystkich kont z ich danymi (imię, nazwisko, saldo)
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.util.ArrayList;
 
 public class Bank {
@@ -40,11 +41,13 @@ public class Bank {
         Account account2 = new Account("Maja", "Niegrzeczna", -100.00);
         Account account3 = new Account("Tomek", "Szybki", 1589.03);
         Account account4 = new Account("Barbara", "Wolna", 1569823.25);
+        Account account5Sav = new Account("Wojciech Odważny", 50000.00);
 
         numberOfaccounts.add(account1);
         numberOfaccounts.add(account2);
         numberOfaccounts.add(account3);
         numberOfaccounts.add(account4);
+
 
 
         Bank.displayAccount();
@@ -53,5 +56,7 @@ public class Bank {
         System.out.println("Decreasing balance of Mr. Grzeczny: " + account1.balanceDecrease(589.23));
 
         Bank.closeAccount("Wolna");
+
+        System.out.println("Increasing balance on saving account: " + account5Sav.savingBalanceIncrease());
     }
 }
