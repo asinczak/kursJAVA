@@ -21,15 +21,16 @@ public class TestCzlowiek {
         for (int i = 0; i < tablicaZuczestnikami.length; i++) {
             tablicaZuczestnikami [i] = new Czlowiek(20,170, r.nextInt(100), "man");
 
-            System.out.println(tablicaZuczestnikami [i].waga);
-            tablicaZuczestnikami [i].odchudz();
-            tablicaZuczestnikami [i].odchudz();
-            tablicaZuczestnikami [i].odchudz();
-            tablicaZuczestnikami [i].rosnij();
-            System.out.println("po odchudzaniu " + tablicaZuczestnikami [i].waga);
-            System.out.println("teraz mam " + tablicaZuczestnikami [i].wzrost + " wzrostu");
+            Czlowiek czlowiek = tablicaZuczestnikami[i];
+            System.out.println(czlowiek.waga);
+            czlowiek.odchudz();
+            czlowiek.odchudz();
+            czlowiek.odchudz();
+            czlowiek.rosnij();
+            System.out.println("po odchudzaniu " + czlowiek.waga);
+            System.out.println("teraz mam " + czlowiek.wzrost + " wzrostu");
 
-            System.out.println("uczestnicy liczą " + tablicaZuczestnikami [i].czlowiekLiczy(tablicaZuczestnikami [i].waga, tablicaZuczestnikami [i].wzrost));
+            System.out.println("uczestnicy liczą " + czlowiek.czlowiekLiczy(czlowiek.waga, czlowiek.wzrost));
 
 
         }
