@@ -11,8 +11,8 @@ public class Dollar extends Money {
     }
 
 
-    public Dollar addWithExchange (Franc franc) {
-        this.amountOfMoney = franc.amountOfMoney * 1.01 + this.amountOfMoney;
+    public Dollar addWithExchange (Franc franc, double dollarExchngeRate) {
+        this.amountOfMoney = franc.amountOfMoney * dollarExchngeRate + this.amountOfMoney;
         return new Dollar(this.amountOfMoney);
     }
 }

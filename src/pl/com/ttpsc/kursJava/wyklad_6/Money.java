@@ -28,7 +28,7 @@ public class Money implements IMoney {
         return true;
     }
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
 
 //        System.out.println(new Money(5).equlas(new Money(5)));
 //        System.out.println(new Money(5).equlas(new Money(6)));
@@ -48,14 +48,14 @@ public class Money implements IMoney {
 
         Dollar dollar4 = new Dollar(500);
         Franc franc3 = new Franc(200);
-        dollar4.addWithExchange(franc3);
+        dollar4.addWithExchange(franc3, 1.01);
         System.out.println("Suma dolarów po wymianie funtów: " + dollar4.getAmountOfMoney());
 
 
         Franc franc4 = new Franc(150);
         Dollar dollar5 = new Dollar(300);
-        franc4.addWithExchange(dollar5);
-        System.out.println("Suma funtów po wymianie dolarów: " + franc4.getAmountOfMoney());
+        franc4.addWithExchange(dollar5, 0.99);
+        System.out.println("Suma funtów po wymianie dolarów: " + franc4);
     }
 }
 

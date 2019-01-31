@@ -10,8 +10,13 @@ public class Franc extends Money {
         this.amountOfMoney = franc.amountOfMoney + this.amountOfMoney;
     }
 
-    public Franc addWithExchange (Dollar dollar) {
-        this.amountOfMoney = dollar.amountOfMoney * 0.99 + this.amountOfMoney;
+    public Franc addWithExchange (Dollar dollar, double francExchangeRate) {
+        this.amountOfMoney = dollar.amountOfMoney * francExchangeRate + this.amountOfMoney;
         return new Franc(this.amountOfMoney);
+    }
+
+    @Override
+    public String toString () {
+        return "" + getAmountOfMoney();
     }
 }
