@@ -1,62 +1,81 @@
 package pl.com.ttpsc.kursJava.wyklad_6;
 
-//Stwórz klasę Bank i Konto. Klasa Bank może posiadać wiele kąt (dla wielu klientów)
-//a. Klasa konto reprezentuje sumę pieniędzy dla konkretnego klienta. Zawiera imię i nazwisko klienta oraz sumę
-// pieniędzy zgromadzoną na koncie
-//b. Obiekt klasy konto można stworzyć podając imię, nazwisko i początkową kwotę pieniędzy
-//    i.     Kwota nie może być mniejsza od 0. Jeśli taka kwota zostanie podana np. -10, na ekranie powinno się wypisać,
-//    że nie można stworzyć konta z ujemnym saldem
-//    ii.     Klasa konto powinna posiadać możliwość zwiększenie lub zmniejszenia salda o konkretną (podaną) kwotę
-//c. Klasa Bank powinna mieć możliwość dodawania kolejnych kont
-//    i.     liczba kont nie jest z góry znana i w każdej chwili może się zmienić
-//d.      Klasa bank powinna mieć możliwość usunięcia konta dla klienta po nazwisku – metoda przyjmuje nazwisko i wyszukuje konto do usunięcia
-//e.      Klasa bank powinna mieć możliwość wyświetlenie na ekranie wszystkich kont z ich danymi (imię, nazwisko, saldo)
-
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Bank {
+public class Bank implements IBank{
 
-    static ArrayList<Account> numberOfaccounts = new ArrayList<Account>();
-
-    static void closeAccount (String surname) {
-        for (int i = 0; i < numberOfaccounts.size(); i++){
-            if (numberOfaccounts.get(i).surname == surname){
-                System.out.println("Account to closed: " + numberOfaccounts.get(i).surname);
+    @Override
+    public void searchingCustomer1(List <IndividualCustomer> list, String surname) {
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).surname == surname) {
+                System.out.println("Searching for the surname: " + list.get(i).IDnumber);
             }
         }
     }
 
+    @Override
+    public void searchingCustomer2(List <IndividualCustomer> list, String name, String surname) {
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).name == name & list.get(i).surname == surname) {
+                System.out.println("Searching for the name & surname: " + list.get(i).IDnumber);
+            }
+        }
+    }
 
-   static void displayAccount () {
-        for (int i = 0; i < numberOfaccounts.size(); i++){
-            System.out.println("Account: 1.name & surmname: " +numberOfaccounts.get(i).name +" "+ numberOfaccounts.get(i).surname + " 2.balance: " + numberOfaccounts.get(i).balanceAccount);
+    @Override
+    public void removingCustomer(List <IndividualCustomer> list, String surname) {
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).surname == surname) {
+                System.out.println("Removing customer: " + list.remove(i));
+            }
+        }
+    }
+
+    @Override
+    public void displayList(List <IndividualCustomer> list) {
+        for (Object obj: list) {
+            System.out.println("Customer: " + obj);
         }
     }
 
 
     public static void main(String[] args) {
 
-        Account account1 = new Account("Jan", "Grzeczny", 123589.23);
-        Account account2 = new Account("Maja", "Niegrzeczna", -100.00);
-        Account account3 = new Account("Tomek", "Szybki", 1589.03);
-        Account account4 = new Account("Barbara", "Wolna", 1569823.25);
-        Account account5Sav = new Account("Wojciech Odważny", 50000.00);
+        CurrentAccount acc1 = new CurrentAccount(1000.00);
+        CurrentAccount acc2 = new CurrentAccount(5698.01);
+        CurrentAccount acc3 = new CurrentAccount(228.30);
+        CurrentAccount acc4 = new CurrentAccount(100200.00);
+        CurrentAccount acc5 = new CurrentAccount(00.00);
+        SavingAccount sav1 = new SavingAccount(5000.00);
 
-        numberOfaccounts.add(account1);
-        numberOfaccounts.add(account2);
-        numberOfaccounts.add(account3);
-        numberOfaccounts.add(account4);
+        List <IndividualCustomer> customerList = new ArrayList<>();
+
+        IndividualCustomer customer1 = new IndividualCustomer("Tomasz", "Wolny", "70100205789", acc1);
+        IndividualCustomer customer2 = new IndividualCustomer("Piotr", "Słowik", "56021589125", acc2);
+        IndividualCustomer customer3 = new IndividualCustomer("Irena", "Raj", "82041082742", acc3);
+        IndividualCustomer customer4 = new IndividualCustomer("Anna", "Zając", "68092705148", acc4);
+        IndividualCustomer customer5 = new IndividualCustomer("Tomasz", "King", "79053012451", acc5);
+        customer2.addSavingAccount(customer2, sav1);
+
+        customerList.add(customer1);
+        customerList.add(customer2);
+        customerList.add(customer3);
+        customerList.add(customer4);
+        customerList.add(customer5);
 
 
+      acc1.isActive();
+      acc5.isActive();
 
-        Bank.displayAccount();
+      Bank testBank = new Bank();
 
-        System.out.println("Increasing balance of Mrs. Niegrzeczna: " + account2.balanceIncrease(100000.00));
-        System.out.println("Decreasing balance of Mr. Grzeczny: " + account1.balanceDecrease(589.23));
+      testBank.searchingCustomer1(customerList, "Raj");
+      testBank.searchingCustomer2(customerList, "Piotr", "Słowik");
+      testBank.displayList(customerList);
+      testBank.removingCustomer(customerList, "King");
+      testBank.displayList(customerList);
 
-        Bank.closeAccount("Wolna");
 
-        System.out.println("Increasing balance on saving account: " + account5Sav.savingBalanceIncrease());
     }
 }
