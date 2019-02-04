@@ -7,14 +7,21 @@ public class IndividualCustomer extends Customer{
 
     double balanceCurrentAccount;
     double balanceSavingAccount;
+    List <CurrentAccount> currentAccountList;
+    CurrentAccount currentAccount;
 
-    IndividualCustomer (String name, String surname, String IDnumber, CurrentAccount currentAccount) {
+    IndividualCustomer (String name, String surname, String IDnumber, CurrentAccount currentAccount, List <CurrentAccount> currentAccountList) {
         super(name, surname, IDnumber);
-        this.balanceCurrentAccount = currentAccount.balanceCurrentAccount;
+        this.currentAccount = currentAccount;
+        this.currentAccountList = currentAccountList;
     }
 
     public void addSavingAccount(IndividualCustomer customer, SavingAccount savingAccount) {
         this.balanceSavingAccount = savingAccount.balanceSavingAccount;
+    }
+
+    public CurrentAccount getCurrentAccount (){
+        return currentAccount;
     }
 
     public String getName () {
@@ -41,25 +48,5 @@ public class IndividualCustomer extends Customer{
     }
 
 
-    public static void main(String[] args) {
-
-
-        List<CurrentAccount> accountList = new LinkedList<>();
-
-        CurrentAccount acc1 = new CurrentAccount(1000.00);
-        CurrentAccount acc2 = new CurrentAccount(5698.01);
-        CurrentAccount acc3 = new CurrentAccount(228.30);
-        CurrentAccount acc4 = new CurrentAccount(100200.00);
-        CurrentAccount acc5 = new CurrentAccount(78253.46);
-
-        accountList.add(acc1);
-        accountList.add(acc2);
-        accountList.add(acc3);
-        accountList.add(acc4);
-        accountList.add(acc5);
-
-
-
-    }
 
 }
