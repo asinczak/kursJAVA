@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface IBank {
 
+    void addIndividualCustomer (IndividualCustomer individualCustomer);
+
     void searchingCustomer1 (List <IndividualCustomer> list, String surname);
 
     void searchingCustomer2 (List <IndividualCustomer> list, String name, String surnmae);

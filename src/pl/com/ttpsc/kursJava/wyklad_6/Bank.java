@@ -13,6 +13,11 @@ public class Bank implements IBank{
     }
 
     @Override
+    public void addIndividualCustomer(IndividualCustomer individualCustomer) {
+       customerList.add(individualCustomer);
+    }
+
+    @Override
     public void searchingCustomer1(List <IndividualCustomer> list, String surname) {
         for(int i = 0; i < list.size(); i++) {
             if (list.get(i).surname == surname) {
@@ -65,7 +70,7 @@ public class Bank implements IBank{
         accountList.add(acc4);
         accountList.add(acc5);
 
-        List <IndividualCustomer> customerList = new ArrayList<>();
+
 
         IndividualCustomer customer1 = new IndividualCustomer("Tomasz", "Wolny", "70100205789", acc1, accountList );
         IndividualCustomer customer2 = new IndividualCustomer("Piotr", "Słowik", "56021589125", acc2, accountList);
@@ -74,19 +79,24 @@ public class Bank implements IBank{
         IndividualCustomer customer5 = new IndividualCustomer("Tomasz", "King", "79053012451", acc5, accountList);
         customer2.addSavingAccount(customer2, sav1);
 
-        customerList.add(customer1);
-        customerList.add(customer2);
-        customerList.add(customer3);
-        customerList.add(customer4);
-        customerList.add(customer5);
+        List <IndividualCustomer> customerList = new LinkedList<>();
+
+        Bank testBank = new Bank(customerList);
+
+        testBank.addIndividualCustomer(customer1);
+        testBank.addIndividualCustomer(customer2);
+        testBank.addIndividualCustomer(customer3);
+        testBank.addIndividualCustomer(customer4);
+        testBank.addIndividualCustomer(customer5);
+
 
 
       customer1.getCurrentAccount().isActive();
       customer5.getCurrentAccount().isActive();
 
-      Bank testBank = new Bank(customerList);
 
-      testBank.searchingCustomer1(customerList, "Raj");
+
+      testBank.searchingCustomer1( customerList,"Raj");
       testBank.searchingCustomer2(customerList, "Piotr", "Słowik");
       testBank.displayList(customerList);
       testBank.removingCustomer(customerList, "King");
