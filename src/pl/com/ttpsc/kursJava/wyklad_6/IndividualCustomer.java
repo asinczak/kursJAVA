@@ -14,6 +14,7 @@ public class IndividualCustomer extends Customer{
         super(name, surname, IDnumber);
         this.currentAccount = currentAccount;
         this.currentAccountList = currentAccountList;
+        this.balanceCurrentAccount = currentAccount.balanceCurrentAccount;
     }
 
     public void addSavingAccount(IndividualCustomer customer, SavingAccount savingAccount) {
