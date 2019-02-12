@@ -1,6 +1,4 @@
-package pl.com.ttpsc.kursJava.wyklad_7.widocznosc.pakietB;
-
-import pl.com.ttpsc.kursJava.wyklad_7.widocznosc.pakietA.Baza;
+package pl.com.ttpsc.kursJava.Piotrek.wyklad_7.widocznosc.pakietB;
 
 public class TestWidocznoscPakietB {
 

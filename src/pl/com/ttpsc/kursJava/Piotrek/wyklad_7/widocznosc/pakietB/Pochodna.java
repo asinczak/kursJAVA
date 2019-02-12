@@ -1,6 +1,6 @@
-package pl.com.ttpsc.kursJava.wyklad_7.widocznosc.pakietB;
+package pl.com.ttpsc.kursJava.Piotrek.wyklad_7.widocznosc.pakietB;
 
-import pl.com.ttpsc.kursJava.wyklad_7.widocznosc.pakietA.Baza;
+import pl.com.ttpsc.kursJava.Piotrek.wyklad_7.widocznosc.pakietA.Baza;
 
 public class Pochodna extends Baza {
 

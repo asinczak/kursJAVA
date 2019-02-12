@@ -1,4 +1,4 @@
-package pl.com.ttpsc.kursJava.wyklad_7.interfaces;
+package pl.com.ttpsc.kursJava.Piotrek.wyklad_7.interfaces;
 
 import java.util.ArrayList;
 import java.util.List;

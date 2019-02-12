@@ -1,4 +1,4 @@
-package pl.com.ttpsc.kursJava.wyklad_7.widocznosc.pakietA;
+package pl.com.ttpsc.kursJava.Piotrek.wyklad_7.widocznosc.pakietA;
 
 public class PochodnaWPakiecieA extends Baza {
 
