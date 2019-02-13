@@ -14,8 +14,8 @@ public class CzlowiekTest {
         Czlowiek czlowiek1 = new Czlowiek(30, 165, 58, 'k');
         Czlowiek czlowiek2 = new Czlowiek(18, 178, 89, 'm');
         Czlowiek czlowiek3 = new Czlowiek(50, 168, 70, 'k');
-        Czlowiek czlowiek4 = new Czlowiek(45, 175, 70, 'm');
-        Czlowiek czlowiek5 = new Czlowiek(45, 175, 70, 'm');
+        Czlowiek czlowiek4 = new Czlowiek(45, 175, 75, 'm');
+        Czlowiek czlowiek5 = new Czlowiek(45, 175, 80, 'm');
 
         map.put(czlowiek1, "Bąk");
         map.put(czlowiek2, "Lis");
@@ -26,19 +26,22 @@ public class CzlowiekTest {
         System.out.println(czlowiek4.equals(czlowiek5));
         System.out.println(czlowiek4.equals(czlowiek1));
 
-        Set<Map.Entry<Czlowiek, String>> entrySet = map.entrySet();
+        Set<Map.Entry<Czlowiek, String>> entries = map.entrySet();
+        Set<Map.Entry<Czlowiek, String>> entrySet = entries;
 
         for (Map.Entry<Czlowiek, String> entry : entrySet) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
 
-        Iterator<Map.Entry<Czlowiek, String>> it = map.entrySet().iterator();
-
+        Iterator<Map.Entry<Czlowiek, String>> it = entries.iterator();
+        System.out.println("============================");
         while (it.hasNext()){
            Map.Entry <Czlowiek,String> entry = it.next();
             if (entry.getKey().equals(czlowiek2)){
                 it.remove();
+
             }
+            System.out.println(entry);
         }
         System.out.println("po usunięciu elementu");
 

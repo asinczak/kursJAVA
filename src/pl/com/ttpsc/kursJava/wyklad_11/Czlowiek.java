@@ -43,12 +43,12 @@ public class Czlowiek {
             return false;
         }
             Czlowiek otherCzlowiek = (Czlowiek) obj;
-            return wiek==otherCzlowiek.getWiek() & wzrost==otherCzlowiek.wzrost & waga==otherCzlowiek.waga & plec==otherCzlowiek.plec;
+            return wiek==otherCzlowiek.getWiek() & wzrost==otherCzlowiek.getWzrost() & plec==otherCzlowiek.plec;
     }
 
     @Override
     public int hashCode () {
-        return 17 * wiek + 31 * wzrost + 10 * waga + 7 * plec;
+        return 17 * wiek + 31 * wzrost + 7 * plec;
     }
 
 }
