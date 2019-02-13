@@ -6,21 +6,22 @@ public class HR {
 
     private Employee[] employees;
     private int employment;
+    static int licznik = 0;
+
 
     public HR(int employment) {
         this.employees = new Employee[employment];
         this.employment = employment;
         try {
             if (employment >= 7) {
-                throw new ArrayIndexOutOfBoundsException("Firma nie może zatrudnić więcej pracowników niż 6");
+                throw new EmploymnetExeption();
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(e);
+        } catch (EmploymnetExeption e) {
+            System.out.println(e.getMessage());
         }
     }
 
 
-    int licznik = 0;
     public void addEmployee(Employee employee) {
         employees[licznik] = employee;
                 licznik++;
@@ -78,15 +79,15 @@ public class HR {
         for(int i = 0; i <employees.length; i++) {
             int j;
             for (j = 0; j < i; j++) {
-                if (employees[i].getDepartment() == employees[j].getDepartment()) ;
-                break;
+                if (employees[i].getDepartment() == employees[j].getDepartment()) {
+                    break;
+
+                }
             }
             if (i==j) {
                 System.out.println("Departments in company :" + employees[i].getDepartment());
-
             }
 }
-
     }
 
     public void displayAllEmloyeesOfDep(int departemnt) {
