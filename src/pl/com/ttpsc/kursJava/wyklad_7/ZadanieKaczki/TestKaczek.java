@@ -11,7 +11,7 @@ public class TestKaczek {
         Latanie latanie = new LatamBoMamSkrzydla();
         Latanie latanie1 = new NieLatam();
 
-       DzikaKaczka dzikaKaczka = new DzikaKaczka();
+       Kaczka dzikaKaczka = new DzikaKaczka();
          dzikaKaczka.wyswietl();
          dzikaKaczka.plywaj();
 
@@ -23,7 +23,7 @@ public class TestKaczek {
 
         System.out.println("============================");
 
-        GumowaKaczka gumowaKaczka = new GumowaKaczka();
+        Kaczka gumowaKaczka = new GumowaKaczka();
         gumowaKaczka.wyswietl();
         gumowaKaczka.plywaj();
 
@@ -35,7 +35,7 @@ public class TestKaczek {
 
         System.out.println("============================");
 
-        PlaskonosKaczka plaskonosKaczka = new PlaskonosKaczka();
+        Kaczka plaskonosKaczka = new PlaskonosKaczka();
 
         plaskonosKaczka.wyswietl();
         plaskonosKaczka.plywaj();
@@ -48,7 +48,7 @@ public class TestKaczek {
 
         System.out.println("============================");
 
-        WabikKaczka wabikKaczka = new WabikKaczka();
+        Kaczka wabikKaczka = new WabikKaczka();
 
         wabikKaczka.wyswietl();
         wabikKaczka.plywaj();
