@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Bank implements IBank{
 
-    static List <Customer> customerList;
+   private static List <Customer> customerList;
 
     Bank (){
         this.customerList = new LinkedList<>();
@@ -17,36 +17,37 @@ public class Bank implements IBank{
     }
 
     @Override
-    public void searchingCustomer1(List <Customer> list, String surname) {
-        for(int i = 0; i < list.size(); i++) {
-            if (list.get(i).surname.equals(surname)){
-                System.out.println("Searching for the surname: " + list.get(i).IDnumber);
+    public void searchingCustomer(String surname) {
+        for(int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).surname.equals(surname)){
+                System.out.println("Searching for the surname: " + customerList.get(i).IDnumber);
             }
         }
     }
 
     @Override
-    public void searchingCustomer2(List <Customer> list, String name, String surname) {
-        for(int i = 0; i < list.size(); i++) {
-            if (list.get(i).name.equals(name) & list.get(i).surname.equals(surname)) {
-                System.out.println("Searching for the name & surname: " + list.get(i).IDnumber);
+    public void searchingCustomer(String name, String surname) {
+        for(int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).name.equals(name) & customerList.get(i).surname.equals(surname)) {
+                System.out.println("Searching for the name & surname: " + customerList.get(i).IDnumber);
             }
         }
     }
 
     @Override
-    public void removingCustomer(List <Customer> list, String surname) {
-        for(int i = 0; i < list.size(); i++) {
-            if (list.get(i).surname == surname) {
-                System.out.println("Removing customer: " + list.remove(i));
+    public void removingCustomer(String surname) {
+        for(int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).surname.equals(surname)) {
+                System.out.println("Removing customer: " + customerList.remove(i));
             }
         }
     }
 
     @Override
-    public void displayList(List <Customer> list) {
-        for (Object obj: list) {
-            System.out.println("Customer: " + obj);
+    public void displayList() {
+        for (Customer customer: customerList) {
+            System.out.println("Customer: " + customer);
+            System.out.println("Account list" + customer.accountList);
         }
     }
 
@@ -67,14 +68,14 @@ public class Bank implements IBank{
         IndividualCustomer customer4 = new IndividualCustomer("Anna", "Zając", "68092705148");
         IndividualCustomer customer5 = new IndividualCustomer("Tomasz", "King", "79053012451");
 
-        customer1.addAccount(acc1, customer1);
-        customer2.addAccount(acc2, customer2);
-        customer3.addAccount(acc3, customer3);
-        customer4.addAccount(acc4, customer4);
-        customer5.addAccount(acc5, customer5);
-        customer1.addAccount(sav1, customer1);
-        customer2.addAccount(sav2, customer2);
-        customer3.addAccount(sav3, customer3);
+        customer1.addAccount(acc1 );
+        customer2.addAccount(acc2 );
+        customer3.addAccount(acc3 );
+        customer4.addAccount(acc4 );
+        customer5.addAccount(acc5 );
+        customer1.addAccount(sav1 );
+        customer2.addAccount(sav2 );
+        customer3.addAccount(sav3 );
 
         Bank testBank = new Bank();
 
@@ -87,13 +88,14 @@ public class Bank implements IBank{
         acc5.isActive();
         sav2.isActive();
 
-      testBank.searchingCustomer1( customerList,"Raj");
-      testBank.searchingCustomer2(customerList, "Piotr", "Słowik");
-      testBank.displayList(customerList);
-      testBank.removingCustomer(customerList, "King");
-      testBank.displayList(customerList);
+      testBank.searchingCustomer( "Raj");
+      testBank.searchingCustomer( "Piotr", "Słowik");
+      testBank.removingCustomer("King");
+      testBank.displayList();
 
-        customer1.displayAccountList(customer1);
+        customer1.displayAccountList();
+
+      sav2.balanceConvertion();
 
     }
 }

@@ -1,40 +1,28 @@
 package pl.com.ttpsc.kursJava.Bank;
 
-public class CurrentAccount implements Account {
-
-    double balanceCurrentAccount;
+public class CurrentAccount extends Account {
 
     CurrentAccount (double balanceCurrentAccount) {
-        this.balanceCurrentAccount = balanceCurrentAccount;
+        this.balanceAccount = balanceCurrentAccount;
         if (balanceCurrentAccount < 0){
             System.out.println("You can't create account with negative balance");
         }
    }
 
     public double getBalanceCurrentAccount () {
-        return balanceCurrentAccount;
+        return balanceAccount;
     }
 
     public double balanceIncrease (double amount) {
-        return balanceCurrentAccount += amount;
+        return balanceAccount += amount;
     }
 
     public double balanceDecrease (double amount) {
-        return balanceCurrentAccount -= amount;
-    }
-
-
-    @Override
-    public void isActive() {
-        if (this.balanceCurrentAccount > 0){
-            System.out.println("Active account");
-        }
-        else {
-            System.out.println("Inactive account");
-        }
+        return balanceAccount -= amount;
     }
 
     public String toString () {
         return  "Acc balance :" + getBalanceCurrentAccount();
     }
+
 }

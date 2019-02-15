@@ -4,13 +4,28 @@ import java.util.List;
 
 public interface IBank {
 
+    /**
+     * method addCustomer adds Customer to the customerList
+     */
     void addCustomer (Customer customer);
 
-    void searchingCustomer1 (List <Customer> list, String surname);
+    /**
+     * method searchingCustomer searches for Customer by the given surname, in the customerList
+     */
+    void searchingCustomer (String surname);
 
-    void searchingCustomer2 (List <Customer> list, String name, String surnmae);
+    /**
+     * method searchingCustomer searches for Customer by the given name and surname, in the customerList
+     */
+    void searchingCustomer (String name, String surname);
 
-    void removingCustomer (List <Customer> list, String surname);
+    /**
+     * method removingCustomer searches for Customer by the given surname and removes it from the customerList
+     */
+    void removingCustomer (String surname);
 
-    void displayList (List <Customer> list);
+    /**
+     * method displayList displays the whole customerList which contains the Customers and the accountLists
+     */
+    void displayList ();
 }

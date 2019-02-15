@@ -1,32 +1,25 @@
 package pl.com.ttpsc.kursJava.Bank;
 
-public class SavingAccount implements Account {
+public class SavingAccount extends Account {
 
-   double balanceSavingAccount;
-
-   SavingAccount (double balanceSavingAccount) {
-       this.balanceSavingAccount = balanceSavingAccount;
+    SavingAccount (double balanceSavingAccount) {
+       this.balanceAccount = balanceSavingAccount;
    }
 
     public double getBalanceSavingAccount () {
-        return balanceSavingAccount;
+        return balanceAccount;
     }
 
-    @Override
-    public void isActive() {
-        if (this.balanceSavingAccount > 0){
-            System.out.println("Active account");
-        }
-        else {
-            System.out.println("Inactive account");
-        }
-    }
-
-    public void increasingBalance (double balanceSavingAccount) {
-        this.balanceSavingAccount = balanceSavingAccount + (balanceSavingAccount * 0.02);
+    public double increasingBalance () {
+        return this.balanceAccount = balanceAccount + (balanceAccount * 0.02);
     }
 
     public String toString (){
        return "Sav balance: " + getBalanceSavingAccount();
+    }
+
+    public void balanceConvertion (){
+                this.balanceAccount = balanceAccount + (balanceAccount * 0.02);
+        System.out.println("Saving balance re-count: " + balanceAccount);
     }
 }
