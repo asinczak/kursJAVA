@@ -9,16 +9,15 @@ public class HR {
     static int licznik = 0;
 
 
-    public HR(int employment) {
+    public HR() throws EmploymnetException {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter number of Employment");
+        this.employment = scan.nextInt();
         this.employees = new Employee[employment];
-        this.employment = employment;
-        try {
-            if (employment >= 7) {
-                throw new EmploymnetExeption();
+
+        if (employment >= 7) {
+                throw new EmploymnetException();
             }
-        } catch (EmploymnetExeption e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 
@@ -81,7 +80,6 @@ public class HR {
             for (j = 0; j < i; j++) {
                 if (employees[i].getDepartment() == employees[j].getDepartment()) {
                     break;
-
                 }
             }
             if (i==j) {
@@ -108,7 +106,16 @@ public class HR {
 
     public static void main(String[] args) {
 
-        HR hr = new HR(6);
+        HR hr = null;
+
+        do {
+            try {
+                hr = new HR();
+                break;
+            } catch (EmploymnetException employmnetException) {
+                System.out.println(employmnetException.getMessage());
+            }
+        } while (true);
 
         Employee employee1 = new Employee("Jan", "Szewczyk", 3000, 'm', 3);
         Employee employee2 = new Employee("Kaja", "Kajak", 5000, 'f', 2);
@@ -132,7 +139,6 @@ public class HR {
 
 
     }
-
 
     }
 
