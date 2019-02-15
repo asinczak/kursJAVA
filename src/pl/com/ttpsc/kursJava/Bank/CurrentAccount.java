@@ -4,10 +4,14 @@ public class CurrentAccount extends Account {
 
     CurrentAccount (double balanceCurrentAccount) {
         this.balanceAccount = balanceCurrentAccount;
-        if (balanceCurrentAccount < 0){
-            System.out.println("You can't create account with negative balance");
+        try {
+            if (balanceCurrentAccount <= 0) {
+                throw new BalanceExeption();
+            }
+        } catch (BalanceExeption b) {
+            System.out.println(b.getMessage());
         }
-   }
+    }
 
     public double getBalanceCurrentAccount () {
         return balanceAccount;
