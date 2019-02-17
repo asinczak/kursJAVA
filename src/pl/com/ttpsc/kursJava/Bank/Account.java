@@ -6,9 +6,13 @@ public class Account {
 
     public Account (double balanceAccount) throws BalanceExeption {
         this.balanceAccount = balanceAccount;
-            if (balanceAccount <= 0) {
+            if (balanceAccount < 0) {
                 throw new BalanceExeption();
             }
+    }
+
+    public double getBalanceAccount () {
+        return balanceAccount;
     }
 
      void isActive (){
@@ -22,6 +26,14 @@ public class Account {
 
     public double balanceConvertion (){
          return this.balanceAccount;
+    }
+
+    public void increasingBalanace (double amount) {
+        balanceAccount = balanceAccount + amount;
+    }
+
+    public void decreasingBalance (double amount) {
+        balanceAccount = balanceAccount - amount;
     }
 
 }

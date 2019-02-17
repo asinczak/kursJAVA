@@ -115,10 +115,44 @@ public class Bank implements IBank{
     }
 
     public void sortingListByBalance () {
-        System.out.println("customers list  sorted crescively by the current Account balance: ");
+        System.out.println("customers list sorted crescively by the current Account balance: ");
         Collections.sort(customerList, new CurrentAccountBalanceComparator());
         for (Customer cm : customerList) {
             System.out.println(cm);
         }
     }
+
+    public void sortingListByBalanceReverse () {
+        System.out.println("Customers list sorted in descending order by the current Account balance: ");
+        Collections.sort(customerList, new CurrentAccountBalanceComparatorReverse());
+        for (Customer cm : customerList) {
+            System.out.println(cm);
+        }
+    }
+
+    public void makeTransfer (double amount, String surname1, String surname2, int place) {
+            for (Customer cm : customerList) {
+                if(cm.surname.equals(surname1)) {
+                if (cm.accountList.get(place).getBalanceAccount() < amount) {
+                    try {
+                        throw new TransferException();
+
+                    } catch (TransferException e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                } else {
+                    for (Customer cm1 : customerList) {
+                        if (cm1.surname.equals(surname1)) {
+                            cm1.accountList.get(place).decreasingBalance(amount);
+                        }
+                        if (cm1.surname.equals(surname2)) {
+                            cm1.accountList.get(place).increasingBalanace(amount);
+                        }
+                    }
+                    }
+                }
+            }
+    }
+
 }

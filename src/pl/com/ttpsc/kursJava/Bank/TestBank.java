@@ -8,11 +8,13 @@ public class TestBank {
 
         Bank testBank = new Bank();
 
-        IndividualCustomer customer1 = new IndividualCustomer("Tomasz", "Wolny", "70100205789");
-        IndividualCustomer customer2 = new IndividualCustomer("Piotr", "Słowik", "56021589125");
-        IndividualCustomer customer3 = new IndividualCustomer("Irena", "Raj", "82041082742");
-        IndividualCustomer customer4 = new IndividualCustomer("Anna", "Zając", "68092705148");
-        IndividualCustomer customer5 = new IndividualCustomer("Tomasz", "King", "79053012451");
+        Customer customer1 = new IndividualCustomer("Tomasz", "Wolny", "70100205789");
+        Customer customer2 = new IndividualCustomer("Piotr", "Słowik", "56021589125");
+        Customer customer3 = new IndividualCustomer("Irena", "Raj", "82041082742");
+        Customer customer4 = new IndividualCustomer("Anna", "Zając", "68092705148");
+        Customer customer5 = new IndividualCustomer("Tomasz", "King", "79053012451");
+
+        Customer customer6 = new BusinessCustomer("Zuzanna", "Szybka", "77020515963", "125874365", 2000.00);
 
         customer1.addAccount(testBank.createCurrentAccount(5602.05) );
         customer2.addAccount(testBank.createCurrentAccount(10589.00) );
@@ -47,7 +49,13 @@ public class TestBank {
         testBank.searchingByIDnumber("70100205789");
         testBank.sortingListAlphabetically();
         testBank.sortingListByBalance();
-
+        testBank.sortingListByBalanceReverse();
+        System.out.println("================================");
+        System.out.println("Customer list after adding business Customer: ");
+        testBank.addCustomer(customer6);
+        testBank.displayList();
+        testBank.makeTransfer(1000, "Raj", "Zając", 0);
+        System.out.println("Balances after transfers: " +customer3.getAccount(0).getBalanceAccount()+" "+ customer4.getAccount(0).getBalanceAccount());
     }
 
 }

@@ -58,5 +58,15 @@ public interface IBank {
      * method sortingListByBalance sorts customers list crescively by the current Account balance
      */
     public void sortingListByBalance ();
+
+    /**
+     * method sortingListByBalanceReverse sorts customers list in descending order by the current Account balance
+     */
+    public void sortingListByBalanceReverse ();
+
+    /**
+     * method makeTransfer transfers money from one to another account
+     */
+    public void makeTransfer (double amount, String surname1, String surname2, int place);
 }
 

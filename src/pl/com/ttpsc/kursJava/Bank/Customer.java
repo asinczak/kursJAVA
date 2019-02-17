@@ -32,6 +32,10 @@ public class Customer {
         accountList.add(account);
     }
 
+    public Account getAccount (int index) {
+        return accountList.get(index);
+    }
+
     public void displayAccountList() {
         for (Account acc: accountList) {
             System.out.println("Account list for " + surname+": "+ acc);
@@ -42,5 +46,9 @@ public class Customer {
         for (Account acc : accountList){
             System.out.println("Balance conversion of account list: " + acc.balanceConvertion());
         }
+    }
+
+    public String toString () {
+        return "" + getName()+" "+ getSurname() +" "+ getIDnumber();
     }
 }
