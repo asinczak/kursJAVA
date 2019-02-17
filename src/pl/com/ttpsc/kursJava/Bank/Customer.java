@@ -16,13 +16,31 @@ public class Customer {
         this.IDnumber = IDnumber;
     }
 
+    public String getName () {
+        return name;
+    }
+
+    public String getSurname () {
+        return surname;
+    }
+
+    public String getIDnumber () {
+        return IDnumber;
+    }
+
     public void addAccount(Account account) {
         accountList.add(account);
     }
 
     public void displayAccountList() {
-        for (Object obj: accountList) {
-            System.out.println("Account list for " + surname+": "+ obj);
+        for (Account acc: accountList) {
+            System.out.println("Account list for " + surname+": "+ acc);
+        }
+    }
+
+    public void customerBalanceConvertion (){
+        for (Account acc : accountList){
+            System.out.println("Balance conversion of account list: " + acc.balanceConvertion());
         }
     }
 }

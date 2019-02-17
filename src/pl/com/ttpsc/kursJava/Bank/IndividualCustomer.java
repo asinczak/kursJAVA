@@ -1,6 +1,7 @@
 package pl.com.ttpsc.kursJava.Bank;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class IndividualCustomer extends Customer{
 
@@ -9,17 +10,9 @@ public class IndividualCustomer extends Customer{
         this.accountList = new LinkedList<>();
     }
 
-    public String getName () {
-        return name;
+    public Account getAccount (int index) {
+        return accountList.get(index);
     }
-
-     public String getSurname () {
-        return surname;
-     }
-
-     public String getIDnumber () {
-        return IDnumber;
-     }
 
      public String toString () {
         return "" + getName()+" "+ getSurname() +" "+ getIDnumber();

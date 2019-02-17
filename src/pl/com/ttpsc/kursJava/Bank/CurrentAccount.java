@@ -2,15 +2,9 @@ package pl.com.ttpsc.kursJava.Bank;
 
 public class CurrentAccount extends Account {
 
-    CurrentAccount (double balanceCurrentAccount) {
-        this.balanceAccount = balanceCurrentAccount;
-        try {
-            if (balanceCurrentAccount <= 0) {
-                throw new BalanceExeption();
-            }
-        } catch (BalanceExeption b) {
-            System.out.println(b.getMessage());
-        }
+
+    public CurrentAccount(double balanceAccount) throws BalanceExeption {
+        super(balanceAccount);
     }
 
     public double getBalanceCurrentAccount () {

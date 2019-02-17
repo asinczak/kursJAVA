@@ -28,4 +28,35 @@ public interface IBank {
      * method displayList displays the whole customerList which contains the Customers and the accountLists
      */
     void displayList ();
+
+    /**
+     * method bankAccountConversion displays accounts conversion of all customers
+     */
+    public void bankAccountConversion ();
+
+    /**
+     *method createCurrentAccount opens current account
+     */
+    public Account createCurrentAccount (double balance);
+
+    /**
+     *method createSavingAccount opens saving account
+     */
+    public Account createSavingAccount (double balance);
+
+    /**
+     * method searchingByIDnumber finds customer by the given ID number
+     */
+    public void searchingByIDnumber (String IDnumber);
+
+    /**
+     * method sortingListAlphabetically sorts customers list alphabetically
+     */
+    public void sortingListAlphabetically ();
+
+    /**
+     * method sortingListByBalance sorts customers list crescively by the current Account balance
+     */
+    public void sortingListByBalance ();
 }
+

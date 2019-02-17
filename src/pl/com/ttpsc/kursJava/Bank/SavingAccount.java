@@ -2,9 +2,9 @@ package pl.com.ttpsc.kursJava.Bank;
 
 public class SavingAccount extends Account {
 
-    SavingAccount (double balanceSavingAccount) {
-       this.balanceAccount = balanceSavingAccount;
-   }
+    public SavingAccount(double balanceAccount) throws BalanceExeption {
+        super(balanceAccount);
+    }
 
     public double getBalanceSavingAccount () {
         return balanceAccount;
@@ -18,8 +18,8 @@ public class SavingAccount extends Account {
        return "Sav balance: " + getBalanceSavingAccount();
     }
 
-    public void balanceConvertion (){
+    public double balanceConvertion (){
                 this.balanceAccount = balanceAccount + (balanceAccount * 0.02);
-        System.out.println("Saving balance re-count: " + balanceAccount);
+        return this.balanceAccount;
     }
 }

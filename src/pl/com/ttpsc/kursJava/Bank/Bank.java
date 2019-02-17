@@ -1,7 +1,8 @@
 package pl.com.ttpsc.kursJava.Bank;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
+import static java.util.Collections.*;
 
 public class Bank implements IBank{
 
@@ -13,7 +14,19 @@ public class Bank implements IBank{
 
     @Override
     public void addCustomer(Customer customer) {
-        customerList.add(customer);
+        do {
+            try {
+                for (Customer cust : customerList) {
+                    if (cust.IDnumber.equals(customer.IDnumber)) {
+                        throw new TheSameCustomerException();
+                    }
+                }
+                } catch(TheSameCustomerException e) {
+                System.out.println(e.getMessage());
+            }
+                customerList.add(customer);
+                    break;
+            } while (true) ;
     }
 
     @Override
@@ -51,51 +64,61 @@ public class Bank implements IBank{
         }
     }
 
-    public static void main(String[] args) {
+    public void bankAccountConversion (){
+        for (Customer customer : customerList){
+           customer.customerBalanceConvertion();
+        }
+    }
 
-        CurrentAccount acc1 = new CurrentAccount(1000.00);
-        CurrentAccount acc2 = new CurrentAccount(5698.01);
-        CurrentAccount acc3 = new CurrentAccount(228.30);
-        CurrentAccount acc4 = new CurrentAccount(100200.00);
-        CurrentAccount acc5 = new CurrentAccount(00.00);
-        SavingAccount sav1 = new SavingAccount(5000.00);
-        SavingAccount sav2 = new SavingAccount(1000.00);
-        SavingAccount sav3 = new SavingAccount(789.25);
+    public Account createCurrentAccount (double balance) {
+        Account acc = null;
+        try {
+               acc = new CurrentAccount(balance);
 
-        IndividualCustomer customer1 = new IndividualCustomer("Tomasz", "Wolny", "70100205789");
-        IndividualCustomer customer2 = new IndividualCustomer("Piotr", "Słowik", "56021589125");
-        IndividualCustomer customer3 = new IndividualCustomer("Irena", "Raj", "82041082742");
-        IndividualCustomer customer4 = new IndividualCustomer("Anna", "Zając", "68092705148");
-        IndividualCustomer customer5 = new IndividualCustomer("Tomasz", "King", "79053012451");
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+            }
+        return acc;
+    }
 
-        customer1.addAccount(acc1 );
-        customer2.addAccount(acc2 );
-        customer3.addAccount(acc3 );
-        customer4.addAccount(acc4 );
-        customer5.addAccount(acc5 );
-        customer1.addAccount(sav1 );
-        customer2.addAccount(sav2 );
-        customer3.addAccount(sav3 );
+    public Account createSavingAccount (double balance){
+        Account sav = null;
+        try {
+             sav = new SavingAccount(balance) ;
 
-        Bank testBank = new Bank();
+        } catch (BalanceExeption balanceExeption) {
+            System.out.println(balanceExeption.getMessage());
+        }
+        return sav;
+    }
 
-        testBank.addCustomer(customer1);
-        testBank.addCustomer(customer2);
-        testBank.addCustomer(customer3);
-        testBank.addCustomer(customer4);
-        testBank.addCustomer(customer5);
+    public void searchingByIDnumber (String IDnumber) {
+        Map <String, Customer> customerMap = new LinkedHashMap<>();
+            for (Customer cm : customerList) {
+                customerMap.put(cm.IDnumber, cm);
+            }
 
-        acc5.isActive();
-        sav2.isActive();
+            Set<Map.Entry< String, Customer>> entrySet = customerMap.entrySet();
+            for (Map.Entry<String, Customer> entry : entrySet) {
+                if (IDnumber.equals(entry.getKey())){
+                    System.out.println("Searched customer is: "+ entry.getValue());
+                }
+            }
+    }
 
-      testBank.searchingCustomer( "Raj");
-      testBank.searchingCustomer( "Piotr", "Słowik");
-      testBank.removingCustomer("King");
-      testBank.displayList();
+    public void sortingListAlphabetically () {
+        System.out.println("Customer list sorted alphabetically: ");
+        Collections.sort(customerList, new CustomerSurnameComparator());
+        for (Customer cm : customerList){
+            System.out.println(cm);
+        }
+    }
 
-        customer1.displayAccountList();
-
-      sav2.balanceConvertion();
-
+    public void sortingListByBalance () {
+        System.out.println("customers list  sorted crescively by the current Account balance: ");
+        Collections.sort(customerList, new CurrentAccountBalanceComparator());
+        for (Customer cm : customerList) {
+            System.out.println(cm);
+        }
     }
 }
