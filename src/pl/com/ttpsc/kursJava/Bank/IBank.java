@@ -37,12 +37,12 @@ public interface IBank {
     /**
      *method createCurrentAccount opens current account
      */
-    public Account createCurrentAccount (double balance);
+    public Account createCurrentAccount (double balance) throws BalanceExeption;
 
     /**
      *method createSavingAccount opens saving account
      */
-    public Account createSavingAccount (double balance);
+    public Account createSavingAccount (double balance) throws BalanceExeption;
 
     /**
      * method searchingByIDnumber finds customer by the given ID number
@@ -65,7 +65,8 @@ public interface IBank {
     public void sortingListByBalanceReverse ();
 
     /**
-     * method makeTransfer transfers money from one to another account
+     * method makeTransfer transfers money from one to another account, in int place you can choose 0: which means Current Account;
+     * or 1: which means Saving Account
      */
     public void makeTransfer (double amount, String surname1, String surname2, int place);
 }

@@ -6,52 +6,55 @@ import static java.util.Collections.*;
 
 public class Bank implements IBank{
 
-   private static List <Customer> customerList;
+   private static Set <Customer> customerList;
+    Map <String, Customer> customerMap;
 
     Bank (){
-        this.customerList = new LinkedList<>();
+        this.customerList = new LinkedHashSet<>();
+        this.customerMap = new LinkedHashMap<>();
     }
 
     @Override
     public void addCustomer(Customer customer) {
-        do {
-            try {
-                for (Customer cust : customerList) {
-                    if (cust.IDnumber.equals(customer.IDnumber)) {
-                        throw new TheSameCustomerException();
-                    }
-                }
-                } catch(TheSameCustomerException e) {
-                System.out.println(e.getMessage());
-            }
-                customerList.add(customer);
-                    break;
-            } while (true) ;
+
+        boolean adding = customerList.add(customer);
+       try {
+           if (!adding) {
+               throw new TheSameCustomerException();
+           }
+       }catch (TheSameCustomerException e){
+           System.out.println(e.getMessage());
+       }
+        customerMap.put(customer.IDnumber, customer);
+
     }
 
     @Override
     public void searchingCustomer(String surname) {
-        for(int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).surname.equals(surname)){
-                System.out.println("Searching for the surname: " + customerList.get(i).IDnumber);
+        for (Customer cm : customerList) {
+            if (cm.surname.equals(surname)){
+              System.out.println("Searching for the surname: " + cm.IDnumber);
             }
         }
     }
 
     @Override
     public void searchingCustomer(String name, String surname) {
-        for(int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).name.equals(name) & customerList.get(i).surname.equals(surname)) {
-                System.out.println("Searching for the name & surname: " + customerList.get(i).IDnumber);
+        for(Customer cm : customerList){
+            if (cm.name.equals(name) & cm.surname.equals(surname)){
+                System.out.println("Searching for the name & surname: " + cm.IDnumber);
             }
         }
     }
 
     @Override
     public void removingCustomer(String surname) {
-        for(int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).surname.equals(surname)) {
-                System.out.println("Removing customer: " + customerList.remove(i));
+        Iterator <Customer> it = customerList.iterator();
+        while (it.hasNext()){
+            Customer cm = it.next();
+            if (cm.surname.equals(surname)){
+                it.remove();
+                System.out.println("Removing customer: " + cm);
             }
         }
     }
@@ -70,62 +73,42 @@ public class Bank implements IBank{
         }
     }
 
-    public Account createCurrentAccount (double balance) {
-        Account acc = null;
-        try {
-               acc = new CurrentAccount(balance);
-
-            } catch (BalanceExeption balanceExeption) {
-                System.out.println(balanceExeption.getMessage());
-            }
-        return acc;
+    public Account createCurrentAccount (double balance) throws BalanceExeption {
+        return new CurrentAccount(balance);
     }
 
-    public Account createSavingAccount (double balance){
-        Account sav = null;
-        try {
-             sav = new SavingAccount(balance) ;
-
-        } catch (BalanceExeption balanceExeption) {
-            System.out.println(balanceExeption.getMessage());
-        }
-        return sav;
+    public Account createSavingAccount (double balance) throws BalanceExeption {
+        return new SavingAccount(balance);
     }
 
     public void searchingByIDnumber (String IDnumber) {
-        Map <String, Customer> customerMap = new LinkedHashMap<>();
-            for (Customer cm : customerList) {
-                customerMap.put(cm.IDnumber, cm);
-            }
-
-            Set<Map.Entry< String, Customer>> entrySet = customerMap.entrySet();
-            for (Map.Entry<String, Customer> entry : entrySet) {
-                if (IDnumber.equals(entry.getKey())){
-                    System.out.println("Searched customer is: "+ entry.getValue());
-                }
-            }
+        Customer cm = customerMap.get(IDnumber);
+        System.out.println("Searched customer is: "+ cm);
     }
 
     public void sortingListAlphabetically () {
         System.out.println("Customer list sorted alphabetically: ");
-        Collections.sort(customerList, new CustomerSurnameComparator());
-        for (Customer cm : customerList){
+        List <Customer> list = new ArrayList<>(customerList);
+        Collections.sort(list, new CustomerSurnameComparator());
+        for (Customer cm : list){
             System.out.println(cm);
         }
     }
 
     public void sortingListByBalance () {
         System.out.println("customers list sorted crescively by the current Account balance: ");
-        Collections.sort(customerList, new CurrentAccountBalanceComparator());
-        for (Customer cm : customerList) {
+        List <Customer> list = new ArrayList<>(customerList);
+        Collections.sort(list, new CurrentAccountBalanceComparator());
+        for (Customer cm : list) {
             System.out.println(cm);
         }
     }
 
     public void sortingListByBalanceReverse () {
         System.out.println("Customers list sorted in descending order by the current Account balance: ");
-        Collections.sort(customerList, new CurrentAccountBalanceComparatorReverse());
-        for (Customer cm : customerList) {
+        List <Customer> list = new ArrayList<>(customerList);
+        Collections.sort(list, new CurrentAccountBalanceComparatorReverse());
+        for (Customer cm : list) {
             System.out.println(cm);
         }
     }

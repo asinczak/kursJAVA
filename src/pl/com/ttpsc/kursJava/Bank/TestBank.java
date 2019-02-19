@@ -16,14 +16,85 @@ public class TestBank {
 
         Customer customer6 = new BusinessCustomer("Zuzanna", "Szybka", "77020515963", "125874365", 2000.00);
 
-        customer1.addAccount(testBank.createCurrentAccount(5602.05) );
-        customer2.addAccount(testBank.createCurrentAccount(10589.00) );
-        customer3.addAccount(testBank.createCurrentAccount(1000.99) );
-        customer4.addAccount(testBank.createCurrentAccount(5896.89) );
-        customer5.addAccount(testBank.createCurrentAccount(58.00) );
-        customer1.addAccount(testBank.createSavingAccount(5000.00) );
-        customer2.addAccount(testBank.createSavingAccount(10000.00) );
-        customer3.addAccount(testBank.createSavingAccount(150000) );
+        do {
+            try {
+                customer1.addAccount(testBank.createCurrentAccount(10586.00));
+                break;
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+                break;
+            }
+        }while (true);
+
+        do {
+            try {
+                customer2.addAccount(testBank.createCurrentAccount(3896.20));
+                break;
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+                break;
+            }
+        }while (true);
+
+         do {
+             try {
+                 customer3.addAccount(testBank.createCurrentAccount(1000.99));
+                 break;
+             } catch (BalanceExeption balanceExeption) {
+                 System.out.println(balanceExeption.getMessage());
+                 break;
+             }
+         }while (true);
+
+        do {
+            try {
+                customer4.addAccount(testBank.createCurrentAccount(5896.89));
+                break;
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+                break;
+            }
+        }while (true);
+
+        do {
+            try {
+                customer5.addAccount(testBank.createCurrentAccount(58.00));
+                break;
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+                break;
+            }
+        }while (true);
+
+        do {
+            try {
+                customer1.addAccount(testBank.createSavingAccount(5000.00));
+                break;
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+                break;
+            }
+        }while (true);
+
+        do {
+            try {
+                customer2.addAccount(testBank.createSavingAccount(10000.00));
+                break;
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+                break;
+            }
+        }while (true);
+
+        do {
+            try {
+                customer3.addAccount(testBank.createSavingAccount(150000));
+                break;
+            } catch (BalanceExeption balanceExeption) {
+                System.out.println(balanceExeption.getMessage());
+                break;
+            }
+        }while (true);
 
         testBank.addCustomer(customer1);
         testBank.addCustomer(customer2);
