@@ -1,8 +1,21 @@
 package pl.com.ttpsc.kursJava.Bank;
 
 import java.util.Collections;
+import java.util.Scanner;
 
 public class TestBank {
+
+    public static void createAccountfromConsol (Bank bank) {
+        Scanner scanner = new Scanner(System.in);
+        double balance = scanner.nextInt();
+        do {
+            try {
+                bank.createCurrentAccount(balance);
+            } catch (BalanceExeption balanceExeption) {
+                balanceExeption.printStackTrace();
+            }
+        } while (true);
+    }
 
     public static void main(String[] args) {
 

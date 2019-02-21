@@ -43,7 +43,7 @@ public class Czlowiek {
             return false;
         }
             Czlowiek otherCzlowiek = (Czlowiek) obj;
-            return wiek==otherCzlowiek.getWiek() & wzrost==otherCzlowiek.getWzrost() & plec==otherCzlowiek.plec;
+            return wiek==otherCzlowiek.getWiek() & wzrost==otherCzlowiek.getWzrost() & plec==otherCzlowiek.getPlec();
     }
 
     @Override
