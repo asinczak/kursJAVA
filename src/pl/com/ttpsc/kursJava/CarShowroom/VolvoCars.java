@@ -55,14 +55,16 @@ public abstract class VolvoCars {
         System.out.println("Please choose one of the options :");
     }
 
-    public static void menu () throws MenuNumberException {
+    public static void menu () {
+
+        boolean switchgoes = true;
 
         do {
             VolvoCars.displayMenu();
 
             Scanner scanner = new Scanner(System.in);
             int menuNumber = scanner.nextInt();
-            if (menuNumber < 10) {
+
 
             switch (menuNumber) {
                 case 1:
@@ -92,31 +94,20 @@ public abstract class VolvoCars {
                 case 9:
                     VolvoCars.rentCar();
                     break;
-
+                case 10:
+                    System.out.println("The end");
+                    switchgoes = false;
+                    break;
+                    default:
+                        System.out.println("Wrong number! Choose one more time!");
                 }
-            } else if (menuNumber > 10){
-                throw new MenuNumberException();
-            }
-
-            else if (menuNumber == 10){
-                System.out.println("The end");
-               break;
-            }
-
-        } while (true);
+        } while (switchgoes);
     }
 
 
     public static void main(String[] args) {
 
-        do {
-            try {
-                VolvoCars.menu();
-                    break;
-            } catch (MenuNumberException e) {
-                System.out.println(e.GetMessage());
-            }
-        }while (true);
-    }
+        VolvoCars.menu();
 
+    }
 }
