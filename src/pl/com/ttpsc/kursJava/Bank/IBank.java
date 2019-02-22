@@ -37,12 +37,16 @@ public interface IBank {
     /**
      *method createCurrentAccount opens current account
      */
-    public Account createCurrentAccount (double balance) throws BalanceExeption;
+    public static Account createCurrentAccount (double balance) throws BalanceExeption {
+        return new CurrentAccount(balance);
+    }
 
     /**
      *method createSavingAccount opens saving account
      */
-    public Account createSavingAccount (double balance) throws BalanceExeption;
+    public static Account createSavingAccount (double balance) throws BalanceExeption {
+        return new SavingAccount(balance);
+    }
 
     /**
      * method searchingByIDnumber finds customer by the given ID number

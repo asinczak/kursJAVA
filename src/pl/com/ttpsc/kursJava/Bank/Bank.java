@@ -73,14 +73,6 @@ public class Bank implements IBank{
         }
     }
 
-    public Account createCurrentAccount (double balance) throws BalanceExeption {
-        return new CurrentAccount(balance);
-    }
-
-    public Account createSavingAccount (double balance) throws BalanceExeption {
-        return new SavingAccount(balance);
-    }
-
     public void searchingByIDnumber (String IDnumber) {
         Customer cm = customerMap.get(IDnumber);
         System.out.println("Searched customer is: "+ cm);

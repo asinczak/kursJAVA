@@ -1,19 +1,18 @@
 package pl.com.ttpsc.kursJava.Bank;
 
+import java.util.LinkedList;
+
 public class BusinessCustomer extends Customer{
 
     String TIN;
-    SavingAccount sav;
-    double balance;
 
     BusinessCustomer(String name, String surname, String IDnumber, String TIN, double balance) {
         super(name, surname, IDnumber);
         this.TIN = TIN;
-        this.balance = balance;
+        this.accountList = new LinkedList<>();
 
-        this.sav = null;
         try {
-            sav = new SavingAccount(this.balance) ;
+           accountList.add(IBank.createSavingAccount(balance));
 
         } catch (BalanceExeption balanceExeption) {
             System.out.println(balanceExeption.getMessage());
@@ -24,11 +23,8 @@ public class BusinessCustomer extends Customer{
         return TIN;
     }
 
-    public double getbalance () {
-        return balance;
-    }
 
     public String toString () {
-        return "" + getName()+" "+ getSurname() +" "+ getIDnumber() +" "+ getTIN() +" "+ getbalance();
+        return "" + getName()+" "+ getSurname() +" "+ getIDnumber() +" "+ getTIN();
     }
 }
