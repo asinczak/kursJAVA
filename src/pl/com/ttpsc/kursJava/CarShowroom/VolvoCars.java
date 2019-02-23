@@ -1,8 +1,16 @@
 package pl.com.ttpsc.kursJava.CarShowroom;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public abstract class VolvoCars {
+
+    static String login;
+    static String password;
+    static String login_password;
+    static BufferedReader reader;
 
     public static void availableCars () {
         System.out.println("The available cars are displayed");
@@ -51,8 +59,62 @@ public abstract class VolvoCars {
         System.out.println("7 -> Reserve a replacement car");
         System.out.println("8 -> Reserve a washing car after service appointment");
         System.out.println("9 -> Rent a car");
-        System.out.println("10 -> Finish");
+        System.out.println("10 -> Sign in as an employee");
+        System.out.println("11 -> Finish");
         System.out.println("Please choose one of the options :");
+    }
+
+    public  static void logInAsEmployee () {
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        int counter =0;
+
+        do {
+
+
+        try {
+            System.out.println("Please enter login :");
+            login = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Please enter password :");
+        try {
+            password = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+                for (String str : Logging.getLoginData()) {
+                    login_password = login + ":" + password;
+                    if (login_password.equals(str)) {
+                        System.out.println("Success! You are signed in.");
+
+                    }
+                    for (String str1 : Logging.getLoginData()) {
+                        login_password = login + ":" + password;
+                        if (!login_password.equals(str1) & counter < 2) {
+                            System.out.println("Fail");
+                            counter++;
+                            break;
+                        } else {
+                            System.out.println("block");
+                            break;
+                        }
+
+                    }
+
+
+                }
+
+
+
+
+
+        } while (counter < 3);
+
     }
 
     public static void menu () {
@@ -95,6 +157,9 @@ public abstract class VolvoCars {
                     VolvoCars.rentCar();
                     break;
                 case 10:
+                    VolvoCars.logInAsEmployee();
+                    break;
+                case 11:
                     System.out.println("The end");
                     switchgoes = false;
                     break;
