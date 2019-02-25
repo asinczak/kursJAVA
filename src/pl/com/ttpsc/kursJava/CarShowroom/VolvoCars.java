@@ -3,7 +3,10 @@ package pl.com.ttpsc.kursJava.CarShowroom;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
+import java.util.Set;
 
 public abstract class VolvoCars {
 
@@ -64,13 +67,10 @@ public abstract class VolvoCars {
         System.out.println("Please choose one of the options :");
     }
 
-    public  static void logInAsEmployee () {
+
+
+    public static void enterData () {
         reader = new BufferedReader(new InputStreamReader(System.in));
-        int counter =0;
-
-        do {
-
-
         try {
             System.out.println("Please enter login :");
             login = reader.readLine();
@@ -84,38 +84,40 @@ public abstract class VolvoCars {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public  static void logInAsEmployee () {
 
+        List dataList = Logging.getLoginData();
+        ListIterator dataIterator = dataList.listIterator();
 
-                for (String str : Logging.getLoginData()) {
-                    login_password = login + ":" + password;
-                    if (login_password.equals(str)) {
-                        System.out.println("Success! You are signed in.");
+        boolean logging = false;
+        int counter = 3;
 
-                    }
-                    for (String str1 : Logging.getLoginData()) {
-                        login_password = login + ":" + password;
-                        if (!login_password.equals(str1) & counter < 2) {
-                            System.out.println("Fail");
-                            counter++;
-                            break;
-                        } else {
-                            System.out.println("block");
-                            break;
-                        }
+        while (counter > 0 && dataIterator.hasNext()) {
+            enterData();
+            login_password = login + ":" + password;
 
-                    }
+            if (login_password.equals(dataIterator.next())) {
+                System.out.println("success");
+                logging = true;
+                break;
+            }
+            if (logging){
+                System.out.println("success");
+            }   else {
+                System.out.println("Failure");
+                counter--;
+            }
+            if (counter == 1) {
+                System.out.println("Blocked");
+            }
+        }
 
-
-                }
-
-
-
-
-
-        } while (counter < 3);
 
     }
+
+
 
     public static void menu () {
 
