@@ -6,7 +6,6 @@ import java.util.List;
 
 public abstract class Logging {
 
-
     public static List<String> getLoginData ()  {
 
         String loginData;

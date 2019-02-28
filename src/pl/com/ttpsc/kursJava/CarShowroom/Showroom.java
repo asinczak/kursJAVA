@@ -1,14 +1,17 @@
 package pl.com.ttpsc.kursJava.CarShowroom;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Showroom {
 
      List<Car> carList;
+     List<Car> orderedCarList;
 
     Showroom () {
-        carList = new LinkedList<>();
+
+        carList = new ArrayList<>();
+        orderedCarList = new ArrayList<>();
     }
 
 }
