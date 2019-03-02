@@ -1,9 +1,6 @@
 package pl.com.ttpsc.kursJava.Exercises;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class FileExercise {
 
@@ -18,8 +15,7 @@ public class FileExercise {
                 for (int i = 0; i <statement.length(); i++){
                     char sign1 = statement.charAt(i);
                     if (i % 2 == 1){
-
-                       int nextValue = (int) sign1 +1;
+                        int nextValue = (int) sign1 +1;
                      sign1 = (char) nextValue;
 
                     }
@@ -33,7 +29,6 @@ public class FileExercise {
 
                     System.out.print(sign2);
                 }
-
 
                 System.out.println("\n");
 
@@ -61,12 +56,29 @@ public class FileExercise {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            finally {
+                try {
+
+                    data.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            try {
+                String tekst = "No input file";
+                Writer writer = new FileWriter(new File("Conversion2.txt"));
+                writer.write(tekst);
+
+                writer.close();
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+
+            }
         }
         return average;
     }
-
 
     public static void main(String[] args) {
 
