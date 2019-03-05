@@ -30,7 +30,7 @@ public class String3 {
             for (i =0; i < word.length(); i++){
                 for (y = 0; y < signs.length; y++) {
                     if (signsOfWord[i] == signs[y]) {
-                        codedWord [i] = signs[y + number];
+                        codedWord [i] = signs[(y + number) % signs.length];
                     }
                 }System.out.print(codedWord[i]);
         }
