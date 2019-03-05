@@ -8,17 +8,17 @@ import java.util.Scanner;
 
 public class String2 {
 
-    public static void main(String[] args) {
+    public void chceckig () {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter some statement :");
         String word = sc.nextLine();
 
+        char sign[] = word.toCharArray();
 
         int counter1 = 0;
         int counter2 = 0;
         for (int i = 0; i < word.length(); i++) {
-            char sign[] = word.toCharArray();
             if (sign[i] == '(') {
                 counter1++;
             }
@@ -34,4 +34,8 @@ public class String2 {
         }
     }
 
+    public static void main(String[] args) {
+        String2 str = new String2();
+        str.chceckig();
+    }
 }

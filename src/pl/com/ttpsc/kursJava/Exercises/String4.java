@@ -6,24 +6,48 @@ package pl.com.ttpsc.kursJava.Exercises;
 //ostatnim znakiem jest literka „a”, która występuje w podanym ciągu łącznie 4
 //razy.
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class String4 {
 
-    public static void main(String[] args) {
+    String word;
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter some word :");
-        String word = sc.nextLine();
+    public void readingFile () {
+        BufferedReader data = null;
+        try {
+            data = new BufferedReader(new FileReader("String4_File.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            word = data.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+  public void checking (){
+
+       readingFile();
+
+      char sign [] = word.toCharArray();
         int counter = 0;
 
         for (int i = 0; i<word.length(); i++){
-            char sign [] = word.toCharArray();
             char lastSign = sign [word.length()-1];
             if (sign[i] == lastSign){
                 counter++;
             }
         }
         System.out.println(counter);
+    }
+
+    public static void main(String[] args) {
+        String4 str = new String4();
+        str.checking();
     }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class String6 {
 
-    public static void main(String[] args) {
+   public void checking (){
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter some statement :");
@@ -16,14 +16,19 @@ public class String6 {
        String tab [] = statement.split(" ");
 
        for(int i = 0; i<tab.length; i++) {
-           try {
+           //try {
                int number = Integer.parseInt(tab[i]);
                sum += number;
-           } catch (NumberFormatException e) {
+           //} catch (NumberFormatException e) {
 
-           }
+           //}
        }
 
         System.out.println(sum);
+    }
+
+    public static void main(String[] args) {
+        String6 str = new String6();
+        str.checking();
     }
 }
