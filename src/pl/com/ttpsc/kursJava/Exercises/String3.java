@@ -8,10 +8,8 @@ package pl.com.ttpsc.kursJava.Exercises;
 //        przyjąć, że łańuch wejściowy składa się tylko z małych liter alfabetu angielskiego,
 //        tj. ’a’ – ’z’ (26 znaków) oraz spacji.
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class String3 {
 
@@ -20,27 +18,23 @@ public class String3 {
     String dataFile = "";
 
     public void readingFile () {
-        BufferedReader data = null;
-        try {
-            data = new BufferedReader(new FileReader("String3_file.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            dataFile = data.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        do {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Please enter word :");
+                word = sc.nextLine();
+                System.out.println("Please enter number");
+                number = sc.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong! Please try again");
+            }
+        } while (true);
     }
 
    public void checking () {
 
        readingFile();
-
-       String tab [] = dataFile.split(" ");
-       word = tab [0];
-       number = Integer.parseInt(tab[1]);
 
         char signs [] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
                             'q','r','s','t','u','v','w','x','y','z'};

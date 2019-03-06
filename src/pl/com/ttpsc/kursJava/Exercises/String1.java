@@ -4,28 +4,25 @@ package pl.com.ttpsc.kursJava.Exercises;
 //rzy łańcuch będący odwróceniem podanego łańcucha i wyświetla go na ekranie.
 //Przykładowo, dla łańcucha „Kot” wynikiem powinien być łańcuch „toK”
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class String1 {
 
     String word;
 
     public void readingFile () {
-        BufferedReader data = null;
-        try {
-            data = new BufferedReader(new FileReader("String1_file.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            word = data.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        do {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Please enter word :");
+                word = sc.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong! Please try again");
+            }
+        } while (true);
     }
 
     public void checking () {

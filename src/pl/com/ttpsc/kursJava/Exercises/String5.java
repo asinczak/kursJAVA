@@ -3,15 +3,29 @@ package pl.com.ttpsc.kursJava.Exercises;
 //Napisać program, który wczytuje od użytkownika ciąg znaków, a następnie spraw-
 //        dza, czy podany ciąg jest palindromem.
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class String5 {
 
+    String word;
+
+    public void readingFile () {
+        do {
+            try {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Please enter word :");
+                word = sc.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong! Please try again");
+            }
+        } while (true);
+    }
+
    public void checking () {
 
-       Scanner sc = new Scanner(System.in);
-       System.out.println("Enter some word :");
-       String word = sc.nextLine();
+      readingFile();
 
        char sign[] = word.toCharArray();
        String reversalWord = "";
@@ -20,9 +34,9 @@ public class String5 {
            reversalWord += sign[i];
        }
        if (word.equals(reversalWord)) {
-           System.out.println("The word is palindrome");
+           System.out.println("The word "+word+" is palindrome");
        } else {
-           System.out.println("The word isn't palindrome");
+           System.out.println("The word "+word+"isn't palindrome");
        }
    }
 
