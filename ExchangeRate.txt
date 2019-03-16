@@ -1,0 +1,2 @@
+FileIn1: https://www.nbp.pl/kursy/xml/a052z190314.xml
+FileIn2: https://www.nbp.pl/kursy/xml/a053z190315.xml
