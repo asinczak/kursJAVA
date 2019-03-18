@@ -23,10 +23,12 @@ public class FileService {
     private static final String HEADING_3 = "Kurs średni";
     private static final String HEADING_4 = "Zmiana";
 
-    List<String> list = new ArrayList<>();
+    List<String> listWithHTTP = new ArrayList<>();
+    List <String> listLinesFromTable = new ArrayList<>();
     String fileIn1 = "";
     String fileIn2 = "";
     XMLfileService xmLfileService = new XMLfileService();
+    File fileWithTable = new File("ExchangeRateTable.txt");
 
     public List<String> readExchangeRateFile() {
 
@@ -37,7 +39,7 @@ public class FileService {
 
                 String line = "";
                 while ((line = bufferedReader.readLine()) != null) {
-                    list.add(line);
+                    listWithHTTP.add(line);
                 }
 
             } catch (FileNotFoundException e) {
@@ -49,19 +51,19 @@ public class FileService {
         } else {
             System.out.println("This file doesn't exist");
         }
-        return list;
+        return listWithHTTP;
     }
 
     public String getFileIn1() {
-        list = readExchangeRateFile();
-        String tab[] = list.get(0).split(": ");
+        listWithHTTP = readExchangeRateFile();
+        String tab[] = listWithHTTP.get(0).split(": ");
         fileIn1 = tab[1];
         return fileIn1;
     }
 
     public String getFileIn2() {
-        list = readExchangeRateFile();
-        String tab[] = list.get(1).split(": ");
+        listWithHTTP = readExchangeRateFile();
+        String tab[] = listWithHTTP.get(1).split(": ");
         fileIn2 = tab[1];
         return fileIn2;
     }
@@ -108,9 +110,9 @@ public class FileService {
             differentInExchange.add(numberformat(singleDifferentInExchange));
         }
 
-        File file = new File("ExchangeRateTable.txt");
 
-        try (Writer writer = new FileWriter(file)){
+
+        try (Writer writer = new FileWriter(fileWithTable)){
 
             String header = "Tabela nr "+tableNumberFileIn1+" z dnia "+dataFileIn1+" w porównaniu z tabelą nr "+tableNumberFileIn2
                     +" z dnia " + dataFileIn2;
@@ -125,6 +127,47 @@ public class FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void readFileWithTable () {
+
+        if (fileWithTable.exists()){
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileWithTable))){
+                String line = "";
+                if ((line = bufferedReader.readLine()) != null){
+                    listLinesFromTable.add(line);
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            System.out.println("File doesn't exist");
+        }
+    }
+
+    public void createHTMLtable () {
+        readFileWithTable();
+
+        File fileHTMLtable = new File("ExchangeRateTableInHTML.html");
+
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter(fileHTMLtable))){
+
+                String firstLine = listLinesFromTable.get(0);
+                printWriter.println("<TABLE>\n<HEAD>"+firstLine+"</HEAD>");
+                printWriter.println("<TR><TH>"+HEADING_1+"\t<TH>"+HEADING_2+"\t<TH>"+HEADING_3+"\t<TH>"+HEADING_4+"</TH></TR>");
+
+
+                printWriter.println("</TABLE>");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
