@@ -5,24 +5,18 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class ReadXMLfile {
+public class XMLfileService {
 
-    CurrencyExchangeRates cer = new CurrencyExchangeRates();
-
-
-    List<Currency> currencylist = new ArrayList<>();
-
-    String tableNumber;
     String publicDate;
     String currencyName;
     String convertion;
     String currencyCode;
-    String averageRate;
-    Currency currency = new Currency(currencyName, currencyCode, averageRate);
+    String averageRateString;
+    float averageRateFloat;
+    String tableNumber;
+    String shortDate;
 
     String getTableNumber (){
         return tableNumber;
@@ -32,14 +26,8 @@ public class ReadXMLfile {
         return publicDate;
     }
 
-    List getcurrencylist (){
-        return currencylist;
-    }
 
-
-    public List readFile () {
-
-
+    public void readFile (String file){
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -52,7 +40,6 @@ public class ReadXMLfile {
                 boolean bconversion = false;
                 boolean bcurrencycode = false;
                 boolean baveragerate = false;
-
 
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
@@ -76,12 +63,7 @@ public class ReadXMLfile {
                     }
                 }
 
-//                public void endElement (String uri, String localName, String qname) throws SAXException {
-//
-//                }
-
                 public void characters(char ch[], int start, int length) throws SAXException {
-
 
                     if (btablenumber) {
                         tableNumber = new String(ch, start, length);
@@ -89,11 +71,13 @@ public class ReadXMLfile {
                     }
                     if (bpublicdata) {
                         publicDate = new String(ch, start, length);
+                        shortDate = publicDate.substring(2);
+                        shortDate = shortDate.replace("-","");
                         bpublicdata = false;
                     }
                     if (bcurrencyname){
                         currencyName = new String(ch, start, length);
-
+                        CurrencyList.getInstance().currencyNameList.add(currencyName);
                         bcurrencyname = false;
                     }
                     if (bconversion){
@@ -102,37 +86,29 @@ public class ReadXMLfile {
                     }
                     if (bcurrencycode){
                         currencyCode = convertion +" "+new String(ch, start, length);
-
+                        CurrencyList.getInstance().currencyCodeList.add(currencyCode);
                         bcurrencycode = false;
                     }
                     if (baveragerate){
-                        averageRate = new String(ch, start, length);
+                        averageRateString = new String(ch, start, length);
+                        averageRateFloat = Float.parseFloat(averageRateString.replace(',','.'));
+                        if (shortDate.equals(FileService.getInstance().getDatefromFileIn1())) {
+                            CurrencyList.getInstance().averageRateListFileIn1.add(averageRateFloat);
+                        }
+                        if (shortDate.equals(FileService.getInstance().getDatefromFileIn2())) {
+                            CurrencyList.getInstance().averageRateListFileIn2.add(averageRateFloat);
+                        }
 
                         baveragerate = false;
                     }
-
-                    currencylist.add(currency);
                 }
-
-
             };
 
-            saxParser.parse(cer.getFileIn1(), defaultHandler);
-
+            saxParser.parse(file, defaultHandler);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-            return currencylist;
-    }
-
-
-    public static void main(String[] args) {
-        ReadXMLfile file = new ReadXMLfile();
-
-
-        System.out.println(file.readFile());
 
     }
-
 }
