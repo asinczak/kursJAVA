@@ -6,8 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-
-public class XMLfileService {
+public class XMLfileServiceWithSAX {
 
     String publicDate;
     String currencyName;
@@ -77,7 +76,7 @@ public class XMLfileService {
                     }
                     if (bcurrencyname){
                         currencyName = new String(ch, start, length);
-                        CurrencyList.getInstance().currencyNameList.add(currencyName);
+                        CurrencyLists.getInstance().currencyNameList.add(currencyName);
                         bcurrencyname = false;
                     }
                     if (bconversion){
@@ -86,17 +85,17 @@ public class XMLfileService {
                     }
                     if (bcurrencycode){
                         currencyCode = convertion +" "+new String(ch, start, length);
-                        CurrencyList.getInstance().currencyCodeList.add(currencyCode);
+                        CurrencyLists.getInstance().currencyCodeList.add(currencyCode);
                         bcurrencycode = false;
                     }
                     if (baveragerate){
                         averageRateString = new String(ch, start, length);
                         averageRateFloat = Float.parseFloat(averageRateString.replace(',','.'));
                         if (shortDate.equals(FileService.getInstance().getDatefromFileIn1())) {
-                            CurrencyList.getInstance().averageRateListFileIn1.add(averageRateFloat);
+                            CurrencyLists.getInstance().averageRateListFileIn1.add(averageRateFloat);
                         }
-                        if (shortDate.equals(FileService.getInstance().getDatefromFileIn2())) {
-                            CurrencyList.getInstance().averageRateListFileIn2.add(averageRateFloat);
+                        else if (shortDate.equals(FileService.getInstance().getDatefromFileIn2())) {
+                            CurrencyLists.getInstance().averageRateListFileIn2.add(averageRateFloat);
                         }
 
                         baveragerate = false;

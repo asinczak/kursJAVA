@@ -3,13 +3,13 @@ package pl.com.ttpsc.kursJava.XMLfileExercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrencyList {
+public class CurrencyLists {
 
-   private static final CurrencyList currencyList = new CurrencyList();
+   private static final CurrencyLists currencyList = new CurrencyLists();
 
-   private CurrencyList () {}
+   private CurrencyLists() {}
 
-    public  static CurrencyList getInstance(){
+    public  static CurrencyLists getInstance(){
        return currencyList;
     }
 

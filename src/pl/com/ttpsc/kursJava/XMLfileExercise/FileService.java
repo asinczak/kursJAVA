@@ -27,8 +27,11 @@ public class FileService {
     List <String> listLinesFromTable = new ArrayList<>();
     String fileIn1 = "";
     String fileIn2 = "";
-    XMLfileService xmLfileService = new XMLfileService();
-    File fileWithTable = new File("ExchangeRateTable.txt");
+    XMLfileServiceWithSAX xmLfileService = new XMLfileServiceWithSAX();
+    XMLfileServiceWithDOM xmLfileServiceWithDOM = new XMLfileServiceWithDOM();
+    File fileWithTableUsingSax = new File("ExchangeRateTableUsingSax.txt");
+    File fileTithTableUsingDOM = new File("ExchangeRateTableUsingDOM.txt");
+    File fileTithTableUsingJAXB = new File("ExchangeRateTableUsingJAXB.txt");
 
     public List<String> readExchangeRateFile() {
 
@@ -84,7 +87,7 @@ public class FileService {
             return bigDecimalFormat;
     }
 
-    public void writeToFile () {
+    public void writeToFileUsingSax () {
         List <String> differentInExchange = new ArrayList<>();
 
         xmLfileService.readFile(getFileIn1());
@@ -92,16 +95,16 @@ public class FileService {
         String tableNumberFileIn1 = xmLfileService.getTableNumber();
         String dataFileIn1 = xmLfileService.getPublicDate();
 
-        List <String> currencyNameFileIn1 = CurrencyList.getInstance().getCurrencyNameList();
-        List <String> currencyCodeFileIn1 = CurrencyList.getInstance().getCurrencyCodeList();
-        List <Float> averageRateFileIn1 = CurrencyList.getInstance().getAverageRateListFileIn1();
+        List <String> currencyNameFileIn1 = CurrencyLists.getInstance().getCurrencyNameList();
+        List <String> currencyCodeFileIn1 = CurrencyLists.getInstance().getCurrencyCodeList();
+        List <Float> averageRateFileIn1 = CurrencyLists.getInstance().getAverageRateListFileIn1();
 
         xmLfileService.readFile(getFileIn2());
 
         String tableNumberFileIn2 = xmLfileService.getTableNumber();
         String dataFileIn2 = xmLfileService.getPublicDate();
 
-        List <Float> averageRateFileIn2 = CurrencyList.getInstance().getAverageRateListFileIn2();
+        List <Float> averageRateFileIn2 = CurrencyLists.getInstance().getAverageRateListFileIn2();
 
         for (int i = 0; i < averageRateFileIn1.size(); i++){
             float singleDifferentInExchangeFileIn1 = averageRateFileIn1.get(i);
@@ -110,9 +113,7 @@ public class FileService {
             differentInExchange.add(numberformat(singleDifferentInExchange));
         }
 
-
-
-        try (Writer writer = new FileWriter(fileWithTable)){
+        try (Writer writer = new FileWriter(fileWithTableUsingSax)){
 
             String header = "Tabela nr "+tableNumberFileIn1+" z dnia "+dataFileIn1+" w porównaniu z tabelą nr "+tableNumberFileIn2
                     +" z dnia " + dataFileIn2;
@@ -131,10 +132,10 @@ public class FileService {
 
     public void readFileWithTable () {
 
-        if (fileWithTable.exists()){
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileWithTable))){
+        if (fileWithTableUsingSax.exists()){
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileWithTableUsingSax))){
                 String line = "";
-                if ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null){
                     listLinesFromTable.add(line);
                 }
 
@@ -154,11 +155,18 @@ public class FileService {
 
         File fileHTMLtable = new File("ExchangeRateTableInHTML.html");
 
-        try (PrintWriter printWriter = new PrintWriter(new FileWriter(fileHTMLtable))){
+        try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileHTMLtable))){
 
                 String firstLine = listLinesFromTable.get(0);
                 printWriter.println("<TABLE>\n<HEAD>"+firstLine+"</HEAD>");
                 printWriter.println("<TR><TH>"+HEADING_1+"\t<TH>"+HEADING_2+"\t<TH>"+HEADING_3+"\t<TH>"+HEADING_4+"</TH></TR>");
+                for (int i = 2; i < listLinesFromTable.size(); i++){
+                    String [] nextLines = listLinesFromTable.get(i).split(" ");
+                    String line = nextLines[0];
+//                    System.out.println(line);
+
+//                    printWriter.println("<TR><TH>" + nextLines + "</TH></TR>");
+                }
 
 
                 printWriter.println("</TABLE>");
@@ -167,7 +175,106 @@ public class FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void writeToFileUsingDOM () {
+        List<String> differentInExchange = new ArrayList<>();
+
+        xmLfileServiceWithDOM.readXMLfile(getFileIn1());
+
+        String tableNumberFileIn1 = xmLfileServiceWithDOM.getTableNumber();
+        String dataFileIn1 = xmLfileServiceWithDOM.getPublicDate();
+
+        List<String> currencyNameFileIn1 = CurrencyLists.getInstance().getCurrencyNameList();
+        List<String> currencyCodeFileIn1 = CurrencyLists.getInstance().getCurrencyCodeList();
+        List<Float> averageRateFileIn1 = CurrencyLists.getInstance().getAverageRateListFileIn1();
+
+        xmLfileServiceWithDOM.readXMLfile(getFileIn2());
+
+        String tableNumberFileIn2 = xmLfileServiceWithDOM.getTableNumber();
+        String dataFileIn2 = xmLfileServiceWithDOM.getPublicDate();
+
+        List<Float> averageRateFileIn2 = CurrencyLists.getInstance().getAverageRateListFileIn2();
+
+        for (int i = 0; i < averageRateFileIn1.size(); i++) {
+            float singleDifferentInExchangeFileIn1 = averageRateFileIn1.get(i);
+            float singleDifferentInExchangeFileIn2 = averageRateFileIn2.get(i);
+            BigDecimal singleDifferentInExchange = BigDecimal.valueOf(singleDifferentInExchangeFileIn1 - singleDifferentInExchangeFileIn2);
+            differentInExchange.add(numberformat(singleDifferentInExchange));
+        }
+
+        try (Writer writer = new FileWriter(fileTithTableUsingDOM)){
+
+            String header = "Tabela nr "+tableNumberFileIn1+" z dnia "+dataFileIn1+" w porównaniu z tabelą nr "+tableNumberFileIn2
+                    +" z dnia " + dataFileIn2;
+
+            writer.write(header );
+            writer.write("\n" +HEADING_1 +"\t"+ HEADING_2+"\t"+ HEADING_3 +"\t" + HEADING_4);
+            for (int i = 0; i < averageRateFileIn1.size(); i++){
+
+                writer.write("\n" +currencyNameFileIn1.get(i)+"\t"+ currencyCodeFileIn1.get(i)+ "\t"+averageRateFileIn1.get(i)+"\t"+ differentInExchange.get(i));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeToFileUsingJAXB () {
+        List<String> differentInExchange = new ArrayList<>();
+
+        Currencies currenciesFile1 = XMLfileServiceWithJAXB.readFile(getFileIn1());
+
+        String tableNumberFileIn1 = currenciesFile1.getTableNumber();
+        String dataFileIn1 = currenciesFile1.getPublicDate();
+
+        List <Currency> listFileIn1 = currenciesFile1.getCurrencyList();
+
+        Currencies currenciesFile2 = XMLfileServiceWithJAXB.readFile(getFileIn2());
+
+        String tableNumberFileIn2 = currenciesFile2.getTableNumber();
+        String dataFileIn2 = currenciesFile2.getPublicDate();
+
+        List <Currency> listFileIn2 = currenciesFile2.getCurrencyList();
+
+        List<String> listAverageRateFile1 = new ArrayList<>();
+        List<String> listAverageRateFile2 = new ArrayList<>();
+
+        for (Currency currency1 : listFileIn1) {
+            String averageRateStringFile1 = currency1.getAverageRate();
+            listAverageRateFile1.add(averageRateStringFile1);
+            }
+
+        for (Currency currency2 : listFileIn2) {
+            String averageRateStringFile2 = currency2.getAverageRate();
+            listAverageRateFile2.add(averageRateStringFile2);
+        }
+
+        for (int i = 0; i <listAverageRateFile1.size(); i++){
+            float averageRateFile1 = Float.parseFloat(listAverageRateFile1.get(i).replace(",","."));
+            float averageRateFile2 = Float.parseFloat(listAverageRateFile2.get(i).replace(",","."));
+            BigDecimal singleDifferentInExchange = BigDecimal.valueOf(averageRateFile1 - averageRateFile2);
+            differentInExchange.add(numberformat(singleDifferentInExchange));
+        }
+        try (Writer writer = new FileWriter(fileTithTableUsingJAXB)){
+
+            String header = "Tabela nr "+tableNumberFileIn1+" z dnia "+dataFileIn1+" w porównaniu z tabelą nr "+tableNumberFileIn2
+                    +" z dnia " + dataFileIn2;
+
+            writer.write(header );
+            writer.write("\n" +HEADING_1 +"\t"+ HEADING_2+"\t"+ HEADING_3 +"\t" + HEADING_4);
+            for (int i = 0; i< listFileIn1.size(); i++){
+
+                writer.write("\n" +listFileIn1.get(i).getCurrencyName()+"\t"+listFileIn1.get(i).getConversion()+ "\t"+listFileIn1.get(i).currencyCode+"\t"
+                        + listFileIn1.get(i).getAverageRate()+ "\t"+differentInExchange.get(i));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
-}
+
+    }
